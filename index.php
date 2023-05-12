@@ -35,9 +35,7 @@
         </div>
     <?php
         unset($_SESSION['message']);
-    }?>
-
-     
+    }?>     
   <table class="table table-bordered">
     <thead>
       <tr>
