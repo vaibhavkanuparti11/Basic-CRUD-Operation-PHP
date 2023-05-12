@@ -6,10 +6,10 @@ session_start();
 <div class="container mt-3">  
   <form action="crud/update.php" method="post" enctype="multipart/form-data">
   <?php
-            $sql=mysqli_query($conn,"SELECT * FROM user WHERE id=".$_GET['id']);
+            $sql=$conn->query("SELECT * FROM user WHERE id=".$_GET['id']);
             // $id=$_GET['id'];
             //     $sql=mysqli_query($conn,"SELECT * FROM user WHERE id='$id'");
-                $row=mysqli_fetch_assoc($sql);   
+                $row=$sql ->fetch_assoc();   
                 //print_r($row);
                 ?>  
         <div class="mb-3 mt-3">
@@ -24,8 +24,8 @@ session_start();
             <label for="descp">Category:</label>
             <select class="form-select" id="category" name="category">
               <?php
-                $csql=mysqli_query($conn,"SELECT * FROM category");
-                while($crow=mysqli_fetch_array($csql)){
+                $csql=$conn->query("SELECT * FROM category");
+                while($crow=$csql ->fetch_assoc()){
               ?>
                 <option value="<?php echo $crow['id'];?>" <?php echo ($row['category']=$crow['id']) ? "selected":"";?>><?php echo $crow['name']; ?></option> 
               <?php } ?>                             
@@ -35,8 +35,8 @@ session_start();
                     <label for="descp">Tags:</label>
                     <div class="form-check">
                         <?php
-                          $sql_tag=mysqli_query($conn,"SELECT * FROM tags");
-                          while($row_tag=mysqli_fetch_array($sql_tag)){
+                          $sql_tag=$conn->query("SELECT * FROM tags");
+                          while($row_tag=$sql_tag ->fetch_assoc()){
                         ?>
                           <input type="checkbox" class="form-check-input" id="tags" name="tags[]" value="<?php echo $row_tag['id'];?>" <?php echo (in_array($row_tag['id'], explode(',',$row['tags']))) ? "checked":"";?>><?php echo $row_tag['name'];?><br>
                         <?php } ?>               

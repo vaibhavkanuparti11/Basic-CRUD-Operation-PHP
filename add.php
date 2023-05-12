@@ -17,7 +17,7 @@ session_start();
             <label for="descp">Category:</label>
             <select class="form-select" id="category" name="category">
                     <?php
-                    $sql=mysqli_query($conn,"SELECT * FROM category");
+                    $sql=$conn->query("SELECT * FROM category");
                     while($row=mysqli_fetch_array($sql)){
                         ?>
                         <option value="<?php echo $row['id'];?>"><?php echo $row['name']; ?></option> 
@@ -28,7 +28,7 @@ session_start();
                     <label for="descp">Tags:</label>
                     <div class="form-check">                   
                         <?php          
-                            $sql=mysqli_query($conn,"SELECT * FROM tags");
+                            $sql=$conn->query("SELECT * FROM tags");
                             while($row=mysqli_fetch_array($sql)){
                         ?>
                         <input type="checkbox" class="form-check-input" id="tags" name="tags[]" value="<?php echo $row['id'];?>" /><?php echo $row['name'];?><br>

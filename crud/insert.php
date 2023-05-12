@@ -14,7 +14,7 @@ if($_POST['module']=='insert'){
     $image = $_FILES['image']['name'];
     $path ='../img/'.basename($image);
     if(move_uploaded_file($_FILES['image']['tmp_name'],$path)){ 
-    $sql=mysqli_query($conn,"INSERT INTO `user`(`title`, `descp`, `category`, `tags`, `publish`, `date`, `image`)
+    $sql=$conn->query("INSERT INTO `user`(`title`, `descp`, `category`, `tags`, `publish`, `date`, `image`)
      VALUES ('$title','$descp','$category','$tags','$publish','$date','$image')");
      if($sql){
         header('Location:../index.php');

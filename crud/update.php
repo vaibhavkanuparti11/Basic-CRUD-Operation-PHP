@@ -3,12 +3,12 @@ include '../dbconnection.php';
 echo "hi";
 session_start();
 if($_POST['module']=='edit'){
-    print_r($row);
+    // print_r($row);
    $id=$_POST['id'];
    $title=$_POST['title'];
    $descp=$_POST['descp'];
    $category=$_POST['category'];
-   // $tags=$_POST['tags'];
+   $tags=implode(",",$_POST['tags']);
    $publish=$_POST['publish'];
    $date=$_POST['date'];    
    $old_image= $_POST['old_image'];
@@ -18,7 +18,7 @@ if($_POST['module']=='edit'){
       $old_image= $image;
       unlink('../img/'.$_POST['old_image']);
    }
-   $sql_edit = mysqli_query($conn,"UPDATE `user` SET `title`='$title',`descp`='$descp',`category`='$category',`publish`='$publish',`date`='$date',`image`='$old_image' WHERE id=$id");
+   $sql_edit = $conn->query("UPDATE `user` SET `title`='$title',`descp`='$descp',`category`='$category',`tags`='$tags',`publish`='$publish',`date`='$date',`image`='$old_image' WHERE id=$id");
    if($sql_edit){
       $_SESSION['status']="updated successfully";
           header('Location:../index.php');

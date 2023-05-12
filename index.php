@@ -52,18 +52,18 @@
       <?php    
         $i=1;
         $sql=$conn->query("SELECT user.*,category.name as cname FROM user LEFT JOIN category ON user.category=category.id");
-        while($row=mysqli_fetch_array($sql)){
-      ?>                
+        while ($row = $sql ->fetch_assoc()) {
+          ?>                               
         <tr>
-          <td><?= $i++?></td>
-          <td><?= $row['title'];?></td>
+          <td><?= $i++?></td>          
+          <td><?= $row["title"];?></td>
           <td><?= $row['cname'];?></td>
           <td>
             <?php
               $tags = explode(',',$row['tags']); $a=1;
-              foreach($tags as $tag){
+              foreach($tags as $tag){              
                 $tsql=$conn->query("SELECT name FROM tags WHERE id=".$tag);
-                $trow=mysqli_fetch_array($tsql);
+                $trow=$tsql->fetch_assoc();
                 echo $trow['name'].($a<count($tags) ? ', ': '');
                 $a++;         
               }               
